@@ -278,11 +278,11 @@ void application_task(void)
         return;
     }
 
-    static uint8_t buffer[10];
+    static uint8_t buffer[2];
 
     memset(buffer, 0xff, sizeof(buffer));
 
-    buffer[0] = header;
+    // buffer[0] = header;
 
     float voltage_avg = NAN;
 
@@ -293,32 +293,32 @@ void application_task(void)
         buffer[1] = voltage_avg * 10.f;
     }
 
-    int orientation;
+    // int orientation;
 
-    if (bc_data_stream_get_median(&sm_orientation, &orientation))
-    {
-        buffer[2] = orientation;
-    }
+    // if (bc_data_stream_get_median(&sm_orientation, &orientation))
+    // {
+    //     buffer[2] = orientation;
+    // }
 
-    float temperature_avg = NAN;
+    // float temperature_avg = NAN;
 
-    bc_data_stream_get_average(&sm_temperature, &temperature_avg);
+    // bc_data_stream_get_average(&sm_temperature, &temperature_avg);
 
-    if (!isnan(temperature_avg))
-    {
-        int16_t temperature_i16 = (int16_t) (temperature_avg * 10.f);
+    // if (!isnan(temperature_avg))
+    // {
+    //     int16_t temperature_i16 = (int16_t) (temperature_avg * 10.f);
 
-        buffer[3] = temperature_i16 >> 8;
-        buffer[4] = temperature_i16;
-    }
+    //     buffer[3] = temperature_i16 >> 8;
+    //     buffer[4] = temperature_i16;
+    // }
 
-    buffer[5] = (uint16_t) click_count >> 8;
-    buffer[6] =(uint16_t) click_count;
+    // buffer[5] = (uint16_t) click_count >> 8;
+    // buffer[6] =(uint16_t) click_count;
 
-    buffer[7] = (uint16_t) hold_count >> 8;
-    buffer[8] = (uint16_t) hold_count;
+    // buffer[7] = (uint16_t) hold_count >> 8;
+    // buffer[8] = (uint16_t) hold_count;
 
-    buffer[9] = (uint8_t) move_count;
+    buffer[0] = (uint8_t) move_count;
     //buffer[10] = (uint16_t) move_count;
     move_count = 0;
 
@@ -333,7 +333,7 @@ void application_task(void)
 
     bc_atci_printf("$SEND: %s", tmp);
 
-    header = HEADER_UPDATE;
+    // header = HEADER_UPDATE;
 
     bc_scheduler_plan_current_relative(SEND_DATA_INTERVAL);
 }
