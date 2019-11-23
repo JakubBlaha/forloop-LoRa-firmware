@@ -212,8 +212,8 @@ bool at_status(void)
 void application_init(void)
 {
     bc_data_stream_init(&sm_voltage, 1, &sm_voltage_buffer);
-    bc_data_stream_init(&sm_temperature, 1, &sm_temperature_buffer);
-    bc_data_stream_init(&sm_orientation, 1, &sm_orientation_buffer);
+    // bc_data_stream_init(&sm_temperature, 1, &sm_temperature_buffer);
+    // bc_data_stream_init(&sm_orientation, 1, &sm_orientation_buffer);
 
     //Initialize PIR
     bc_usb_cdc_init();
@@ -228,13 +228,13 @@ void application_init(void)
     bc_led_set_mode(&led, BC_LED_MODE_ON);
 
     // Initialize button
-    bc_button_init(&button, BC_GPIO_BUTTON, BC_GPIO_PULL_DOWN, false);
-    bc_button_set_event_handler(&button, button_event_handler, NULL);
+    // bc_button_init(&button, BC_GPIO_BUTTON, BC_GPIO_PULL_DOWN, false);
+    // bc_button_set_event_handler(&button, button_event_handler, NULL);
 
     // Initialize Thermometer
-    bc_tmp112_init(&tmp112, BC_I2C_I2C0, 0x49);
-    bc_tmp112_set_event_handler(&tmp112, tmp112_event_handler, NULL);
-    bc_tmp112_set_update_interval(&tmp112, MEASURE_INTERVAL);
+    // bc_tmp112_init(&tmp112, BC_I2C_I2C0, 0x49);
+    // bc_tmp112_set_event_handler(&tmp112, tmp112_event_handler, NULL);
+    // bc_tmp112_set_update_interval(&tmp112, MEASURE_INTERVAL);
 
     // Initialize battery
     bc_module_battery_init();
